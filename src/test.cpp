@@ -4,7 +4,28 @@
 using namespace std;
 using namespace arma;
 
+double quantile(arma::vec d, double confidence_level) {
+  vec sorted = sort(d);
 
+  int confidence_level_index = (d.n_elem - 1) * confidence_level;
+  int x_floor = floor(confidence_level_index);
+
+  vec interpolation_result;
+
+  vec x; 
+  x << x_floor << x_floor + 1;
+
+  vec xx;
+  xx << confidence_level_index;
+
+  vec y = sorted(span(x_floor, x_floor+1));
+
+  interp1(x, y, xx, interpolation_result);
+
+  //cout << x << " y: " << y << " xx: " << xx << "  YY " << YY << endl; 
+
+  return interpolation_result[0];
+}
 
 int main()
 {
@@ -48,6 +69,10 @@ int main()
   other_data.load("../data/transition_matrix.csv");
   cout << size(other_data) << endl << other_data;
 
+
+  mat QQ = randn<vec>(10123);
+  
+  cout << "Quantile(" << size(QQ) << ") max: " << max(QQ) << "  = " <<  quantile(QQ, 0.9599) << endl;
  /* 
   
   mat B = randu<mat>(4,5);
