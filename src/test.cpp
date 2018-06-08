@@ -85,5 +85,11 @@ int main()
   cout << size(A) << endl;
   cout << A*B.t() << endl;
 */
+  cout << A(1,2) << endl;
+
+  A(1,2) = 0.666666;
+
+  cout << A(1,2)*A(1,2)<< endl;
+
   return 0;
 }
