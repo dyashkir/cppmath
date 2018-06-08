@@ -1,6 +1,6 @@
 #include <iostream>
 #include <armadillo>
-
+//plqying zith git
 using namespace std;
 using namespace arma;
 
