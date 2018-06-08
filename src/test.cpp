@@ -91,5 +91,39 @@ int main()
 
   cout << A(1,2)*A(1,2)<< endl;
 
+
+  cube cy = randu<cube>(4,8,8);
+
+  mat ze = zeros<mat>(8,8);
+
+  cy(span(0), span::all, span::all) = ze;
+
+  cout << A << endl;
+
+  cout << sum(A, 1) << endl;
+
+  //normalizing rows
+  vec su = sum(A, 1);
+  A.each_col( [su](vec& val) { val = val/su; } );
+
+  cout << A << endl;
+
+  cout << sum(A, 1) << endl;
+
+  mat N = ones<mat>(3,3);
+  N(0,0) = 5.0;
+  cout << N << endl;
+
+  //better normalize
+  cout << normalise(N, 1, 1) << endl;
+
+  mat transition_matrix = other_data(span(1, 8), span(span::all));
+
+  transition_matrix(7,7) = 1.1;
+  transition_matrix(6,7) = 0.1;
+
+  cout << transition_matrix << endl;
+  cout << normalise(transition_matrix, 1, 1) << endl;
+
   return 0;
 }
